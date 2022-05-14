@@ -1,14 +1,26 @@
-import Head from 'next/head'
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { useState } from "react";
+import Head from "next/head";
+import { FaExternalLinkAlt } from "react-icons/fa";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import Layout from '@components/Layout';
-import Container from '@components/Container';
-import Map from '@components/Map';
-import Button from '@components/Button';
+import Layout from "@components/Layout";
+import Container from "@components/Container";
+import Map, { MapEffect } from "@components/Map";
+import Button from "@components/Button";
+import styles from "@styles/Page.module.scss";
+import center from "@turf/center";
+import { points } from "@turf/helpers";
 
-import styles from '@styles/Page.module.scss'
+export default function Stores({ storeLocations }) {
+  const [activeStore, setActiveStore] = useState();
 
-export default function Stores({storeLocations}) {
+  const features = points(
+    storeLocations.map(({ location }) => {
+      return [location.latitude, location.longitude];
+    })
+  );
+
+  const [defLatitude, defLongitude] = center(features)?.geometry.coordinates;
+
   return (
     <Layout>
       <Head>
@@ -22,30 +34,61 @@ export default function Stores({storeLocations}) {
         <div className={styles.stores}>
           <div className={styles.storesLocations}>
             <ul className={styles.locations}>
-              {storeLocations.map((location) => (
-                <li key={location.id}>
-                  <p className={styles.locationName}>{location.name}</p>
-                  <address>{location.address}</address>
-                  <p>{location.phoneNumber}</p>
-                  <p className={styles.locationDiscovery}>
-                    <button>View on Map</button>
-                    <a
-                      href={`https://www.google.com/maps/dir//${location.location.latitude},${location.location.longitude}/@${location.location.latitude},${location.location.longitude},15z/`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Get Directions
-                      <FaExternalLinkAlt />
-                    </a>
-                  </p>
-                </li>
-              ))}
+              {storeLocations.map((location) => {
+                function handleOnClick() {
+                  setActiveStore(location.id);
+                }
+                return (
+                  <li key={location.id}>
+                    <p className={styles.locationName}>{location.name}</p>
+                    <address>{location.address}</address>
+                    <p>{location.phoneNumber}</p>
+                    <p className={styles.locationDiscovery}>
+                      <button onClick={handleOnClick}>View on Map</button>
+                      <a
+                        href={`https://www.google.com/maps/dir//${location.location.latitude},${location.location.longitude}/@${location.location.latitude},${location.location.longitude},15z/`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Get Directions
+                        <FaExternalLinkAlt />
+                      </a>
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
           <div className={styles.storesMap}>
             <div className={styles.storesMapContainer}>
-              <Map className={styles.map}/>
+              <Map
+                className={styles.map}
+                center={[defLatitude, defLongitude]}
+                zoom={4}
+                scrollWheelZoom={false}
+              >
+                {({ TileLayer, Marker, Popup }, map) => (
+                  <>
+                    <MapEffect activeStore={activeStore} storeLocations={storeLocations}/>
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {storeLocations.map((location) => {
+                      const { latitude, longitude } = location.location;
+                      return (
+                        <Marker position={[latitude, longitude]} key={latitude}>
+                          <Popup>
+                            <p>{location.name}</p>
+                            <p>{location.address}</p>
+                          </Popup>
+                        </Marker>
+                      );
+                    })}
+                  </>
+                )}
+              </Map>
             </div>
           </div>
         </div>
@@ -62,18 +105,18 @@ export async function getStaticProps() {
 
   const data = await client.query({
     query: gql`
-    query PageStores {
-      storeLocations {
-        id
-        name
-        address
-        phoneNumber
-        location {
-          latitude
-          longitude
+      query PageStores {
+        storeLocations {
+          id
+          name
+          address
+          phoneNumber
+          location {
+            latitude
+            longitude
+          }
         }
       }
-    }
     `,
   });
   const storeLocations = data.data.storeLocations;

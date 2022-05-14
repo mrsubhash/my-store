@@ -5,6 +5,7 @@ import Layout from "@components/Layout";
 import Container from "@components/Container";
 import Button from "@components/Button";
 import styles from "@styles/Page.module.scss";
+import { buildImage } from '@lib/cloudinary';
 
 export default function Home({ home, products }) {
   const { mainTitle, mainText, mainBackground, mainLink } = home;
@@ -29,7 +30,7 @@ export default function Home({ home, products }) {
                 className={styles.heroImage}
                 width={mainBackground.width}
                 height={mainBackground.height}
-                src={mainBackground.url}
+                src={buildImage(mainBackground.public_id).toURL()}
                 alt=""
               />
             </a>
@@ -40,17 +41,18 @@ export default function Home({ home, products }) {
 
         <ul className={styles.products}>
           {products.map((product) => {
+            const imageUrl =buildImage(product.image.public_id)
+            .resize("w_900,h_900")
+            .toURL();
             return (
               <li key={product.id}>
                 <Link href={`products/${product.slug}`}>
                   <a>
                     <div className={styles.productImage}>
                       <img
-                        width="500"
-                        height="500"
                         width={product.image.width}
                         height={product.image.height}
-                        src={product.image.url}
+                        src={imageUrl}
                         alt=""
                       />
                     </div>

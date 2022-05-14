@@ -4,7 +4,7 @@ import Layout from "@components/Layout";
 import Header from "@components/Header";
 import Container from "@components/Container";
 import Button from "@components/Button";
-
+import { buildImage } from '@lib/cloudinary';
 import styles from "@styles/Product.module.scss";
 
 export default function Product({ product }) {
@@ -21,7 +21,7 @@ export default function Product({ product }) {
             <img
               width={product.image.width}
               height={product.image.height}
-              src={product.image.url}
+              src={buildImage(product.image.public_id).toURL()}
               alt=""
             />
           </div>
