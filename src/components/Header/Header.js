@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingBag } from 'react-icons/fa';
 
 import Container from '@components/Container';
 
@@ -33,17 +33,17 @@ const Header = () => {
         </ul>
         <p className={styles.headerCart}>
           <button>
-            <FaShoppingCart />
-            <span>
+            <FaShoppingBag />
+            {/* <span>
               $0.00
-            </span>
+            </span> */}
           </button>
         </p>
         <ul className={styles.headerLocales}>
           <li>
             <Link href="#">
               <a>
-                ES
+                MS
               </a>
             </Link>
           </li>
