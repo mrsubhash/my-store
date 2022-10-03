@@ -1,0 +1,25 @@
+@import "@styles/settings/__settings";
+
+.wrapper {
+  display: flex;
+  font-size: 0.875rem;
+}
+
+.link {
+  color: $color-gray-700;
+
+  &:not(:first-child) {
+    margin-left: 8px;
+
+    &::before {
+      content: "/";
+      font-weight: 500;
+      margin-right: 8px;
+      color: $color-gray-500;
+    }
+  }
+
+  &:hover {
+    color: $color-gray-900;
+  }
+}
