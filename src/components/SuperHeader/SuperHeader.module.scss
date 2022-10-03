@@ -1,0 +1,23 @@
+@import "@styles/settings/__settings";
+
+.wrapper {
+  font-size: 0.875rem;
+  color: $color-gray-300;
+  background-color: $color-gray-900;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 40px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.message {
+  margin-right: auto;
+  color: $color-white;
+}
+
+.cartIcon {
+  margin-left: 16px;
+  cursor: pointer;
+}

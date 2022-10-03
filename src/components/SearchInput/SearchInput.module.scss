@@ -1,0 +1,26 @@
+@import "@styles/settings/__settings";
+
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $color-gray-300;
+  color: $color-gray-100;
+  outline-offset: 4px;
+  padding-left: 20px;
+
+  &::placeholder {
+    color: $color-gray-500;
+  }
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+}
