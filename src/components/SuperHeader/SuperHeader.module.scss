@@ -10,6 +10,10 @@
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
+
+  @media #{$tablet-and-smaller} {
+    display: none;
+  }
 }
 
 .message {
@@ -18,6 +22,6 @@
 }
 
 .cartIcon {
-  margin-left: 16px;
+  margin-left: 32px;
   cursor: pointer;
 }

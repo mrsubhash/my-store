@@ -1,8 +1,12 @@
 import Link from "next/link";
 import styles from "./Header.module.scss";
 import SuperHeader from "@components/SuperHeader";
+import { FiShoppingBag, FiSearch, FiMenu } from "react-icons/fi";
+import MobileMenu from "@components/MobileMenu";
+import React from "react";
 
 const Header = () => {
+  const [showMenu, setShowMenu] = React.useState(false);
   return (
     <header className={styles.header}>
       <SuperHeader />
@@ -27,8 +31,18 @@ const Header = () => {
           </Link>
         </nav>
 
+        <div className={styles.mobileNav}>
+          <FiShoppingBag size={32} />
+          <FiSearch size={32} />
+          <FiMenu
+            size={32}
+            onClick={() => setShowMenu((showMenu) => !showMenu)}
+          />
+        </div>
+
         <div className={styles.spacer}></div>
       </div>
+      <MobileMenu isOpen={showMenu} onDismiss={() => setShowMenu(false)} />
     </header>
   );
 };

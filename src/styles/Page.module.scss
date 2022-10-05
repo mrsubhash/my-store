@@ -208,6 +208,10 @@
 
 .subCategories {
   flex-basis: 250px;
+
+  @media #{$tablet-and-smaller} {
+    display: none;
+  }
 }
 
 .title {

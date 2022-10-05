@@ -1,8 +1,10 @@
 import Link from "next/link";
 import styles from "./Breadcrumbs.module.scss";
 
-function Breadcrumbs({ children }) {
-  return <nav className={styles.wrapper}>{children}</nav>;
+function Breadcrumbs({ children, className }) {
+  return (
+    <nav className={`${styles.wrapper} ${styles[className]}`}>{children}</nav>
+  );
 }
 
 function Crumb({ href, children, ...delegated }) {

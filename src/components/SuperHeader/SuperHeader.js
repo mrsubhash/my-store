@@ -8,7 +8,7 @@ function SuperHeader() {
       <div className={styles.message}>Free shipping on orders above Rs.500</div>
       <SearchInput />
       <div className={styles.cartIcon}>
-        <FiShoppingBag size={16} />
+        <FiShoppingBag size={24} />
       </div>
     </div>
   );

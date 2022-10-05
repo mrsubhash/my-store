@@ -9,11 +9,24 @@
   border-bottom: 1px solid $color-gray-300;
   display: flex;
   align-items: baseline;
-  height: 72px;
+
+  @media #{$tablet-and-smaller} {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media #{$phone-and-smaller} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 .logoContainer {
   flex: 1;
+
+  @media #{$tablet-and-smaller} {
+    flex: none;
+  }
 }
 
 .logo {
@@ -28,6 +41,24 @@
   display: flex;
   gap: 48px;
   margin: 0 48px;
+
+  @media #{$tablet-and-smaller} {
+    display: none;
+  }
+}
+
+.mobileNav {
+  display: none;
+
+  @media #{$tablet-and-smaller} {
+    display: flex;
+    gap: 32px;
+  }
+
+  @media #{$phone-and-smaller} {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 .navLink {
@@ -39,6 +70,10 @@
 
 .spacer {
   flex: 1;
+
+  @media #{$tablet-and-smaller} {
+    display: none;
+  }
 }
 
 .headerLocales {

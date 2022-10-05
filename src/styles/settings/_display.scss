@@ -1,1 +1,10 @@
-$border-radius-small: .2em;
+$border-radius-small: 0.2em;
+
+$phone: calc(600 / 16 * 1rem);
+$tablet: calc(950 / 16 * 1rem);
+$laptop: calc(1300 / 16 * 1rem);
+
+// Queries
+$phone-and-smaller: "(max-width: #{$phone})";
+$tablet-and-smaller: "(max-width: #{$tablet})";
+$laptop-and-smaller: "(max-width: #{$laptop})";

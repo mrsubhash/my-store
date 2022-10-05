@@ -11,6 +11,15 @@ import Breadcrumbs from "@components/Breadcrumbs";
 import SubCategories from "@components/SubCategories";
 import Spacer from "@components/Spacer";
 
+const CategoryBreadcrumbs = ({ category, className }) => {
+  return (
+    <Breadcrumbs className={className}>
+      <Breadcrumbs.Crumb href="/">{"Home"}</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/">{category.name}</Breadcrumbs.Crumb>
+    </Breadcrumbs>
+  );
+};
+
 export default function Category({ category, products }) {
   return (
     <Layout>
@@ -20,15 +29,13 @@ export default function Category({ category, products }) {
       </Head>
       <div className={styles.categoryWrapper}>
         <div className={styles.subCategories}>
-          <Breadcrumbs>
-            <Breadcrumbs.Crumb href="/">{"Home"}</Breadcrumbs.Crumb>
-            <Breadcrumbs.Crumb href="/">{category.name}</Breadcrumbs.Crumb>
-          </Breadcrumbs>
+          <CategoryBreadcrumbs category={category} />
           <Spacer size={32} />
           <SubCategories />
         </div>
 
         <Container>
+          <CategoryBreadcrumbs category={category} className="mobile" />
           <h2 className={styles.title}>{category.name}</h2>
           <Spacer size={12} />
           <ul className={styles.products}>

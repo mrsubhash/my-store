@@ -1,0 +1,61 @@
+@import "@styles/settings/__settings";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $color-overlay-background;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  background-color: white;
+  height: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.closeButton {
+  position: absolute;
+  padding: 16px;
+  top: 4px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nav > a {
+  color: $color-gray-900;
+  font-weight: $font-weight-medium;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+
+  &:first-child {
+    color: $color-secondary;
+  }
+}
+
+.footer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  > a {
+    color: $color-gray-700;
+  }
+}

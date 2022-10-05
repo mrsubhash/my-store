@@ -3,6 +3,17 @@
 .wrapper {
   display: flex;
   font-size: 0.875rem;
+
+  @media #{$tablet-and-smaller} {
+    display: none;
+  }
+
+  &.mobile {
+    display: none;
+    @media #{$tablet-and-smaller} {
+      display: revert;
+    }
+  }
 }
 
 .link {
