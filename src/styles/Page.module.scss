@@ -91,8 +91,19 @@
   grid-gap: 3em;
 }
 
+.product {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  & > p {
+    margin-top: 12px;
+  }
+}
+
 .productTitle {
-  font-size: 1.4em;
+  font-size: 1rem;
   margin: 0.4em 0 0;
 }
 

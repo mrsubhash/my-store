@@ -10,6 +10,7 @@ import { buildImage } from "@lib/cloudinary";
 import Breadcrumbs from "@components/Breadcrumbs";
 import SubCategories from "@components/SubCategories";
 import Spacer from "@components/Spacer";
+import Image from "next/image";
 
 const CategoryBreadcrumbs = ({ category, className }) => {
   return (
@@ -46,20 +47,27 @@ export default function Category({ category, products }) {
 
               return (
                 <li key={product.id}>
-                  <Link href={`/products/${product.slug}`}>
-                    <a>
-                      <div className={styles.productImage}>
-                        <img width="900" height="900" src={imageUrl} alt="" />
-                      </div>
-                      <h3 className={styles.productTitle}>{product.name}</h3>
-                      <p className={styles.productPrice}>
-                        $ {product.price.toFixed(2)}
-                      </p>
-                    </a>
-                  </Link>
-                  <p>
-                    <Button>Add to Cart</Button>
-                  </p>
+                  <div className={styles.product}>
+                    <Link href={`/products/${product.slug}`}>
+                      <a>
+                        <div className={styles.productImage}>
+                          <Image
+                            width={900}
+                            height={900}
+                            src={imageUrl}
+                            alt=""
+                          />
+                        </div>
+                        <h3 className={styles.productTitle}>{product.name}</h3>
+                        <p className={styles.productPrice}>
+                          $ {product.price.toFixed(2)}
+                        </p>
+                      </a>
+                    </Link>
+                    <p>
+                      <Button>Add to Cart</Button>
+                    </p>
+                  </div>
                 </li>
               );
             })}

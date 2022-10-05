@@ -6,6 +6,7 @@ import Container from "@components/Container";
 import Button from "@components/Button";
 import styles from "@styles/Page.module.scss";
 import { buildImage } from "@lib/cloudinary";
+import Image from "next/image";
 
 export default function Home({ home, products }) {
   const { mainTitle, mainText, mainBackground, mainLink } = home;
@@ -26,7 +27,7 @@ export default function Home({ home, products }) {
                 <h2>{mainTitle}</h2>
                 <p>{mainText}</p>
               </div>
-              <img
+              <Image
                 className={styles.heroImage}
                 width={mainBackground.width}
                 height={mainBackground.height}
@@ -46,23 +47,20 @@ export default function Home({ home, products }) {
               .toURL();
             return (
               <li key={product.id}>
-                <Link href={`products/${product.slug}`}>
-                  <a>
-                    <div className={styles.productImage}>
-                      <img
-                        width={product.image.width}
-                        height={product.image.height}
-                        src={imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <h3 className={styles.productTitle}>{product.name}</h3>
-                    <p className={styles.productPrice}>${product.price}</p>
-                  </a>
-                </Link>
-                <p>
-                  <Button>Add to Cart</Button>
-                </p>
+                <div className={styles.product}>
+                  <Link href={`products/${product.slug}`}>
+                    <a>
+                      <div className={styles.productImage}>
+                        <Image width={900} height={900} src={imageUrl} alt="" />
+                      </div>
+                      <h3 className={styles.productTitle}>{product.name}</h3>
+                      <p className={styles.productPrice}>${product.price}</p>
+                    </a>
+                  </Link>
+                  <p>
+                    <Button>Add to Cart</Button>
+                  </p>
+                </div>
               </li>
             );
           })}
