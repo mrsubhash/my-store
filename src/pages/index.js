@@ -33,6 +33,7 @@ export default function Home({ home, products }) {
                 height={mainBackground.height}
                 src={buildImage(mainBackground.public_id).toURL()}
                 alt=""
+                priority
               />
             </a>
           </Link>
